@@ -37,7 +37,6 @@ x, y = load_data()
 col1, col2= st.columns([40,60])
 with col1:
     no_of_samples = st.slider("No. Of Samples",min_value = 0,max_value = 10,value = 9)
-    # image = Image.open('C:\Users\HP\OneDrive - IIT Kanpur\3 SEM\project\pages\for_page_2_data.png')
     image = Image.open(r'pages\for_page_2_data.png')
 
     st.image(image)
