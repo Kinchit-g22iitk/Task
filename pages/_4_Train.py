@@ -21,19 +21,6 @@ session_state = st.session_state
 
 
 st.markdown(
-    """
-<style>
-button {
-    height: auto;
-    padding-top: 15px !important;
-    padding-bottom: 15px !important;
-    
-}
-</style>
-""",
-    unsafe_allow_html=True,
-)
-st.markdown(
     
 f"""
         <div style="background-color: #ddd; width: 150px; height: 400px; border-radius: 5px; margin: 5px; overflow: hidden;">
