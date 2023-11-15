@@ -10,6 +10,7 @@ from pages._2_Dataset import *
 from pages._4_Train import *
 from datetime import datetime
 session_state = st.session_state
+cv2.setHeadless()
 
 
 # st.title("Make Predictions on your Data")
