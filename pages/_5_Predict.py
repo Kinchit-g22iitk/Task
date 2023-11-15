@@ -10,8 +10,6 @@ from pages._2_Dataset import *
 from pages._4_Train import *
 from datetime import datetime
 session_state = st.session_state
-cv2.setHeadless()
-
 
 # st.title("Make Predictions on your Data")
 st.markdown("<h1 style='text-align: center;'>Make Predictions on your Data</h1>", unsafe_allow_html=True)
