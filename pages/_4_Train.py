@@ -1,6 +1,4 @@
-# import page_3
-# import page_2
-# from pages.3_Model import *
+
 from pages._3_Model import *
 
 from pages._2_Dataset import *
@@ -19,23 +17,10 @@ from tensorflow.keras import regularizers, optimizers
 from keras.optimizers import Adam
 session_state = st.session_state
 
-
-st.markdown(
-    
-f"""
-        <div style="background-color: #ddd; width: 150px; height: 400px; border-radius: 5px; margin: 5px; overflow: hidden;">
-            <div style="background-color: #4CAF50; height: 100%; width: 100%;"></div>
-        </div>
-    """,
-    unsafe_allow_html=True
-
-)
-# st.title("Train your model")
 st.markdown("<h1 style='text-align: center;'>Train your model</h1>", unsafe_allow_html=True)
 
 st.write("Now that we've designed our magical neural network, it's time to unleash its learning potential through a process known as training. Training is like sending our computer wizard to a school of magic, where it learns to recognize the intricate patterns in our handwritten numbers. We take our enchanted dataset, split into a training set and a testing set, and let our wizard study and understand the nuances. The wizard adjusts its parameters, like a diligent student refining its skills, until it becomes proficient in deciphering the secrets hidden within the numbers. This training process ensures that our model becomes a reliable sorcerer, capable of recognizing not only the patterns it learned but also unseen magical symbols.")
 
-# st.title("Train the network")
 st.markdown("<h1 style='text-align: center;'>Train the network</h1>", unsafe_allow_html=True)
 
 st.write("As we embark on the magical journey of training our neural network, envision each iteration as a spellcasting session, refining our wizard's ability to recognize handwritten numbers. The incantations are the mathematical adjustments of our model's parameters, performed during each training epoch. It's like tuning the strings of a magical instrument until the melody is perfect. With each pass through the dataset, our wizard becomes more adept at discerning the unique patterns and features, refining its magical abilities. It's essential to monitor the training process closely, ensuring our wizard doesn't overlearn or underlearn, striking a balance to achieve optimal enchantment. So, let the training commence, and witness as our neural network transforms into a true maestro of recognizing the mystical symbols within our enchanted dataset!")
