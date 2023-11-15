@@ -11,3 +11,6 @@ st.write("Imagine your computer having its very own eyes! These electronic eyes 
 
 image = Image.open(r'pages/for_page_1_data.png')
 st.image(image)
+
+
+
