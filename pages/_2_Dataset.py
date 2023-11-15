@@ -37,7 +37,7 @@ x, y = load_data()
 col1, col2= st.columns([40,60])
 with col1:
     no_of_samples = st.slider("No. Of Samples",min_value = 0,max_value = 10,value = 9)
-    image = Image.open(r'for_page_2_data.png')
+    image = Image.open(r'pages/for_page_1_data.png')
 
     st.image(image)
 indexes = []
