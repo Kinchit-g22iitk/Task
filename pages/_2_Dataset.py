@@ -105,6 +105,17 @@ session_state.test_data_y = y[train_data_:(data_samples-train_data_)]
 session_state.train_data_y = to_categorical(session_state.train_data_y, num_classes=10)
 session_state.test_data_y = to_categorical(session_state.test_data_y, num_classes=10)
 
+st.header("Some common error and fixes while using this app")
+st.write(
+  """
+  Common bugs and solution for them
+1) If the error says "input size is incompatible" , rerun page-4 and see if following error comes
+2) On Page-4, it says "model is not initialized" , then rerun page 3 
+3) If the error now says that "session_state.train_data_x" is not defined, rerun page-2 , then page-3 and then page-4
+4) Also, due to limited storage issues you should not use more than 2 epochs if you are using Pre-Trained model from app
+"""
+)
+
 
 
 
