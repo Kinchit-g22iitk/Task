@@ -3,6 +3,11 @@ from streamlit_drawable_canvas import st_canvas
 from PIL import Image
 import os
 import numpy as np
+import keras 
+from keras.datasets import mnist
+from keras.models import Model
+from keras.layers import Dense, Input
+from keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten
 import cv2
 import time
 from pages._3_Model import *
@@ -10,6 +15,7 @@ from pages._2_Dataset import *
 from pages._4_Train import *
 from datetime import datetime
 session_state = st.session_state
+
 
 # st.title("Make Predictions on your Data")
 st.markdown("<h1 style='text-align: center;'>Make Predictions on your Data</h1>", unsafe_allow_html=True)
@@ -22,7 +28,38 @@ st.markdown("<h1 style='text-align: center;'>Test Data</h1>", unsafe_allow_html=
 
 st.write("Welcome to the realm of interactive enchantment under the 'Test Data' banner! Here, you hold the key to unlocking the magic within your own handwritten symbols or even drawing a digit. By offering the ability to upload images for testing, you become the conjurer of queries, seeking insights from our trained neural network. Picture this as your personal crystal ball, where you can present any mystical symbol you desire, and our sorcerer of a neural network will reveal its interpretation. Whether it's a digit you've penned yourself or a symbol from the magical tapestry of your imagination, this feature empowers you to witness firsthand the mystical predictions and interpretations our trained model can unveil. Upload your own images and let the magic unfold as your computer wizard showcases its ability to decipher the secrets within the visual enchantment you provide.")
 drawn_images_folder = "drawn_images"
+# @st.
+@st.cache_data
+def pre_trained_model_generation():
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+    x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+    inpx = (28, 28, 1)
+    x_train = x_train.astype('float32')
+    x_test = x_test.astype('float32')
+    x_train /= 255
+    x_test /= 255
+    y_train = keras.utils.to_categorical(y_train)
+    y_test = keras.utils.to_categorical(y_test)
+    inpx = Input(shape=inpx)
+    layer1 = Conv2D(32, kernel_size=(3, 3), activation='relu')(inpx)
+    layer2 = Conv2D(64, (3, 3), activation='relu')(layer1)
+    layer3 = MaxPooling2D(pool_size=(3, 3))(layer2)
+    layer4 = Dropout(0.5)(layer3)
+    layer5 = Flatten()(layer4)
+    layer6 = Dense(250, activation='sigmoid')(layer5)
+    layer7 = Dense(10, activation='softmax')(layer6)
+    model = Model([inpx], layer7)
+    model.compile(optimizer=keras.optimizers.Adadelta(),
+              loss=keras.losses.categorical_crossentropy,
+              metrics=['accuracy'])
+ 
+    model.fit(x_train, y_train, epochs=8, batch_size=500)
+    model_filename = f"default_model.h5"
+    model.save(model_filename)
+    return 
 os.makedirs(drawn_images_folder, exist_ok=True)
+pre_trained_model_generation()
 def is_digit_drawn(image_data):
         # Convert to grayscale
         gray = cv2.cvtColor(image_data, cv2.COLOR_RGB2GRAY)
@@ -70,16 +107,15 @@ with col1:
 
         st.success("Digit is drawn and image saved successfully!")
 
-# Rest of your code...
 
 def get_prediction(img_path):
-    model_filename = f"testmodel_{session_state.timestamp}.h5"
+    # model_filename = f"testmodel_{session_state.timestamp}.h5"
+    model_filename = f"testmodel_{session_state.timestamp}.h5" if hasattr(session_state, 'timestamp') and session_state.timestamp else "default_model.h5"
+
     
 # img_28x28 = np.array(image.resize((28, 28), Image.ANTIALIAS))
     model = tf.keras.models.load_model(model_filename)
 
-    # Load and preprocess the input image
-    # img_path = r'C:\Users\HP\OneDrive - IIT Kanpur\3 SEM\project\drawn_images\drawn_image.png'
     img = Image.open(img_path).convert('L')  # Convert to grayscale
     img = img.resize((28, 28))  # Resize to 28x28 pixels
     img_array = np.array(img) / 255.0  # Normalize pixel values to [0, 1]
