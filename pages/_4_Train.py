@@ -63,7 +63,7 @@ col31, col32 = st.columns([60,40], gap = 'large')
 
 # st.write(f"{(session_state.model).summary}")
 with col31:
-    session_state.epochs = st.slider("EPOCHS",min_value=1, value=3,step=1, max_value=10)
+    session_state.epochs = st.slider("EPOCHS",min_value=1, value=3,step=1, max_value=6)
     session_state.lr = st.slider("LEARNING RATE" ,min_value=0.0001, value=0.03,max_value=0.3,step=0.0001)
 for i in range(session_state.epochs):
     (session_state.epochs_list).append(i+1)
