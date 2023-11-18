@@ -12,12 +12,6 @@ st.write("Imagine your computer having its very own eyes! These electronic eyes 
 image = Image.open(r'pages/for_page_1_data.png')
 st.image(image)
 
-st.write(
-  """
-  Important Instuctions for using the app
-  1) Don't directly run page 3 or 4 or 5 without running page 2.
-  2) Always run the pages in sequence.
-"""
-)
+
 
 
