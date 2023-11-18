@@ -72,10 +72,10 @@ with col1:
 
         st.success("Digit is drawn and image saved successfully!")
 
-
+str = "Run page 2 Dataset first and then subsequent pages and then come back to this page"
 def get_prediction(img_path):
-    model_filename = f"testmodel_{session_state.timestamp}.h5"
-    # model_filename = f"testmodel_{session_state.timestamp}.h5" if hasattr(session_state, 'timestamp') and session_state.timestamp else "default_model.h5"
+    # model_filename = f"testmodel_{session_state.timestamp}.h5"
+    model_filename = f"testmodel_{session_state.timestamp}.h5" if hasattr(session_state, 'timestamp') and session_state.timestamp else st.write(str)
 
     
 # img_28x28 = np.array(image.resize((28, 28), Image.ANTIALIAS))
